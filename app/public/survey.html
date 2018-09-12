@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Friend Finder</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/solid.css" integrity="sha384-VGP9aw4WtGH/uPAOseYxZ+Vz/vaTb1ehm1bwx92Fm8dTrE+3boLfF1SpAtB1z7HW"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/fontawesome.css" integrity="sha384-1rquJLNOM3ijoueaaeS5m+McXPJCGdr5HcA03/VHXxcp2kX2sUrQDmFc3jR5i/C7"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery.js"></script>
+
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="jumbotron">
+            <h1 class="text-center"><span class="fas fa-user-friends"></span> Friend Finder!</h1>
+            <br>
+            <h2 class="text-center">Personality Survey</h2>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-8" id="survey">
+            <h3>Name:</h3>
+            <input type="text" id="name" class="form-control" required>
+
+            <div class="text-right">
+                <button class="btn btn-lg btn-primary mt-2" id="next">Next</button>
+            </div>
+
+            <br>
+
+            <h3><strong>Question 1</strong></h3>
+            <h4></h4>
+            <select class="chosen-select" id="q1">
+                <option value=""></option>
+                <option value="1">1 (Strongly Disagree)</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5 (Strongly Agree)</option>
+            </select>
+            <div class="text-right">
+                <button class="btn btn-lg btn-primary mt-2" id="next">Next</button>
+            </div>
+
+        </div>
+        <div class="col"></div>
+    </div>
+
+    </div>
+</body>
+
+
+<script type="text/javascript">
+
+    var responses = {};
+
+    $("#next").on("click", function (event) {
+        event.preventDefault();
+        responses["name"] = $("#name").val().trim();
+
+    })
+
+
+</script>
+
+</html>
