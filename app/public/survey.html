@@ -29,27 +29,11 @@
     <div class="row">
         <div class="col"></div>
         <div class="col-8" id="survey">
-            <h3>Name:</h3>
+            <h3 id="nameDisp">Name:</h3>
             <input type="text" id="name" class="form-control" required>
 
             <div class="text-right">
-                <button class="btn btn-lg btn-primary mt-2" id="next">Next</button>
-            </div>
-
-            <br>
-
-            <h3><strong>Question 1</strong></h3>
-            <h4></h4>
-            <select class="chosen-select" id="q1">
-                <option value=""></option>
-                <option value="1">1 (Strongly Disagree)</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5 (Strongly Agree)</option>
-            </select>
-            <div class="text-right">
-                <button class="btn btn-lg btn-primary mt-2" id="next">Next</button>
+                <button class="btn btn-lg btn-primary mt-2" id="userInfo">Next</button>
             </div>
 
         </div>
@@ -62,12 +46,55 @@
 
 <script type="text/javascript">
 
-    var responses = {};
+    var responses = {name: "",
+                    scores: []};
+    var questions = ["You enjoy playing video games", "You enjoy outdoor activities"]
+    var currentQuestion = 0;
 
-    $("#next").on("click", function (event) {
+    $("#userInfo").on("click", function (event) {
         event.preventDefault();
         responses["name"] = $("#name").val().trim();
+        if(responses.name){
+            $("#survey").empty();
+            displayQuestion();
+        }
+        else{
+            $("#nameDisp").text("Please enter your name: ");
+        }
 
+    })
+
+    function displayQuestion(){
+        if(currentQuestion < questions.length){
+            $("#survey").html("<h3><strong>Question" + (currentQuestion + 1) + "</strong></h3>" +
+            "<h4>" + questions[currentQuestion] + "</h4>"+
+            "<select class='chosen-select' id='answer'>" +
+                "<option value=''></option>" +
+                "<option value='1'>1 (Strongly Disagree)</option>" +
+                "<option value='2'>2</option>" +
+                "<option value='3'>3</option>" +
+                "<option value='4'>4</option>" +
+                "<option value='5'>5 (Strongly Agree)</option>" +
+            "</select>" +
+            "<div class='text-right'>" +
+                "<button class='btn btn-lg btn-primary mt-2' id='next'>Next</button>" +
+            "</div>");
+            currentQuestion++;
+        }
+        else{
+            $("#survey").empty();
+            $.post("/api/friends", responses).then(function(data){
+                console.log(data);
+                var result = $("<h4>Your new best friend is " + data + "</h4>");
+                $("#survey").append(result);
+            })
+        }
+    }
+
+    $("#survey").on("click", "#next", function(event){
+        event.preventDefault();
+        responses.scores.push($("#answer").val());
+        displayQuestion();
     })
 
 
