@@ -1,5 +1,5 @@
 # FriendFinder
-A Express Node site for finding friends with similar intrests! Visit the demo site [Here](https://serene-river-84532.herokuapp.com/)
+A Express Node site for finding friends with similar intrests!
 
 There is a link to the friends API that returns json with everyone, or fill out the survey to have your own scores added and find a new friend with the closest intrests!
 
